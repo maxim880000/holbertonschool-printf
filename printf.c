@@ -1,5 +1,6 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdarg.h>
 
 /**
  * _printf - Prints formatted output to the standard output
@@ -7,19 +8,50 @@
  * 
  * Return: the number of characters or -1 if string(format) is NULL
  */
-int _printf(const char *format, ...);
+int _printf(const char *format, ...)
 {
-	va_list argument; /* we'll need it to recup all arguments */
-	int count; 		  /* to count all the caracters to display */
+	va_list argument; 	   /* we'll need it to recup all arguments */
+	int count = 0; 		  /* to count all the characters to display */
 
-	count = 0; 
-	if (!format) /* if format is NULL */	
+	if (!format) 	  /* if format is NULL */	
 		return (-1); /* in case of error */
 
 	va_start(argument, format); /* start the list of arguments */
 
-	while (*format != '\0')
+	while (*format != '\0') /* we continue format until we find '\0' */
 	{
+		if (*format != '%') 	 /* if we % is invalid */
+			_putchar (*format); /* print *format */
+			count ++; 		   /* iterate +1 characters */
+
 		
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * _putchar - writes a character to stdout
+ * @c: character to print
+ *
+ * Return: 1 on success
+ */
+static int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
 }
