@@ -56,12 +56,18 @@ int _printf(const char *format, ...)
 				}
 				format++;
 			}
-
 			else if (*format == '%') /* resolve th e '%' case */
 			{
 				_putchar('%');
 				count++;
 				format++;
+			}
+			else
+			{
+				_putchar('%'); /* print the % that we skipped earlier */
+				_putchar(*format);  /* print the unknown letter (k, r, n...) */
+				count += 2; /* we printed 2 characters */
+				format++; /* move forward to avoid infinite loop */
 			}
 		}	
 	}
