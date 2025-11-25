@@ -18,40 +18,18 @@ int _printf(const char *format, ...)
 
 	va_start(argument, format); /* start the list of arguments */
 
-	while (*format != '\0') /* we continue format until we find '\0' */
+	while (*(format + count) != '\0') /* we continue format until we find '\0' */
 	{
-		if (*format != '%') 	 /* if we % is invalid */
+		if (*(format + count) != '%') 	 /* if we % is invalid */
+		{
 			_putchar (*format); /* print *format */
 			count ++; 		   /* iterate +1 characters */
+		}
 
-		
+		else
+		{
+			format++; /* we pass to the next (second) character (after %) */
+			
+		}	
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * _putchar - writes a character to stdout
- * @c: character to print
- *
- * Return: 1 on success
- */
-static int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
 }
