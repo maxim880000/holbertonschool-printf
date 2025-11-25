@@ -18,18 +18,50 @@ int _printf(const char *format, ...)
 
 	va_start(argument, format); /* start the list of arguments */
 
-	while (*(format + count) != '\0') /* we continue format until we find '\0' */
+	while (*format != '\0') /* we continue format until we find '\0' */
 	{
-		if (*(format + count) != '%') 	 /* if we % is invalid */
+		if (*format != '%') 	 /* if we % is invalid */
 		{
 			_putchar (*format); /* print *format */
-			count ++; 		   /* iterate +1 characters */
+			count++; 		   /* iterate +1 characters */
+			format++;
 		}
-
 		else
 		{
 			format++; /* we pass to the next (second) character (after %) */
 			
+			if (*format == '\0') /* when it's the end just stop */
+				break;
+				
+			if (*format == 'c') /* resolve the 'c' case */
+			{
+				_putchar(va_arg(argument, int)); /* va_arg recup the next argument as an int */
+												/* and print it with putchar */
+				count++;
+			}
+			
+			else if (*format == 's') /* resolve the 's' case */
+			{
+				char *ptr = va_arg(argument, char *); /* define a pointer which is egal */
+													 /* to the string that we just recuped */
+				if (ptr == NULL) /* nothing in ptr */
+					ptr = "(null)"; /* dislpay "(null)" */
+				
+				while (*ptr != '\0')
+				{
+					_putchar(*str);
+					count++; /* count */
+					str++; /* go to the next chararcter */
+				}
+			}
+
+			else if (*format == '%') /* resolve th e '%' case */
+			{
+				_putchar('%');
+				count++;
+			}
 		}	
 	}
+	va_end(argument);   /* close the list of arguments */
+	return (count);     /* return the numbers of characters displayed */
 }

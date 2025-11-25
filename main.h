@@ -8,7 +8,7 @@
 
 /**
  * struct format - Struct format
- * @specifier: The format specifier character (c, s, %)
+ * @format: The format specifier character (c, s, % etc)
  * @f: Pointer to the function that handles this specifier
  *
  * Description: Structure that associates a format specifier
@@ -17,12 +17,14 @@
 typedef struct format
 {
 	char *format;
-	int (*f)(va_list argument);
+	int (*f)(va_list);
 } format_t;
 
 int _printf(const char *format, ...);
-int print_char(va_list, argument);
-int print_string(va_list, argument);
-int print_%(va_list, argument);
+int _putchar(char c);
+
+int print_char(va_list args);
+int print_string(va_list args);
+int print_percent(va_list args);
 
 #endif
