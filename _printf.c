@@ -24,6 +24,7 @@ int _printf(const char *format, ...)
 		{
 			_putchar (*format); /* print *format */
 			count ++; 		   /* iterate +1 characters */
+			format++;
 		}
 		else
 		{
@@ -37,6 +38,7 @@ int _printf(const char *format, ...)
 				_putchar(va_arg(argument, int)); /* va_arg recup the next argument as an int */
 												/* and print it with putchar */
 				count++;
+				format++;
 			}
 			
 			else if (*format == 's') /* resolve the 's' case */
@@ -44,20 +46,22 @@ int _printf(const char *format, ...)
 				char *ptr = va_arg(argument, char *); /* define a pointer which is egal */
 													 /* to the string that we just recuped */
 				if (ptr == NULL) /* nothing in ptr */
-					ptr = "(null)" /* dislpay "(null)" */
+					ptr = "(null)"; /* dislpay "(null)" */
 				
 				while (*ptr != '\0')
 				{
-					_putchar(*str);
+					_putchar(*ptr);
 					count++; /* count */
-					str++; /* go to the next chararcter */
+					ptr++; /* go to the next chararcter */
 				}
+				format++;
 			}
 
 			else if (*format == '%') /* resolve th e '%' case */
 			{
 				_putchar('%');
 				count++;
+				format++;
 			}
 		}	
 	}
