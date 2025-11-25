@@ -23,7 +23,7 @@ int _printf(const char *format, ...)
 		if (*format != '%') 	 /* if we % is invalid */
 		{
 			_putchar (*format); /* print *format */
-			count ++; 		   /* iterate +1 characters */
+			count++; 		   /* iterate +1 characters */
 			format++;
 		}
 		else
