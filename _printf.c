@@ -40,34 +40,38 @@ int _printf(const char *format, ...)
 				count++;
 				format++;
 			}
-			
+
 			else if (*format == 's') /* resolve the 's' case */
 			{
 				char *ptr = va_arg(argument, char *); /* define a pointer which is egal */
 													 /* to the string that we just recuped */
 				if (ptr == NULL) /* nothing in ptr */
 					ptr = "(null)"; /* dislpay "(null)" */
-				
+
 				while (*ptr != '\0')
 				{
 					_putchar(*ptr);
-					count++; /* count */
-					ptr++; /* go to the next chararcter */
+					count++; /* pass to the next character */
+					ptr++; /* print the next character */
 				}
 				format++;
 			}
-			else if (*format == '%') /* resolve th e '%' case */
+			
+			else if (*format == '%') /* resolve the %% case */
 			{
-				_putchar('%');
-				count++;
-				format++;
+				_putchar('%');                  /* print just one % */
+				count++;                        /* we printed 1 character */
+				format++;                       /* move to next char */
+				continue;                       /* skip the final format++ */
 			}
-			else
+
+			else /* resolve th e '%' case */
+			
 			{
 				_putchar('%'); /* print the % that we skipped earlier */
 				_putchar(*format);  /* print the unknown letter (k, r, n...) */
 				count += 2; /* we printed 2 characters */
-				format++; /* move forward to avoid infinite loop */
+				format++;
 			}
 		}	
 	}
