@@ -2,24 +2,18 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-/**
- * print_number - Helper function to print a number recursively
- * @num: The number to print
- * @count: Pointer to character count
- */
-void print_number(int num, int *count)
+void print_number(unsigned int num)
 {
 	if (num / 10)
-		print_number(num / 10, count);
+		print_number(num / 10);
 	_putchar((num % 10) + '0');
-	(*count)++;
 }
 
 /**
  * _printf - Prints formatted output to the standard output
  * @format: String containing the format specifiers
  *
- * Return: the number of characters printed, or -1 if format is NULL
+ * Return: the number of characters printed
  */
 int _printf(const char *format, ...)
 {
@@ -78,7 +72,12 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
-					print_number(num, &count);
+					print_number((unsigned int)num);
+					while (num > 0)
+					{
+						count++;
+						num /= 10;
+					}
 				}
 			}
 			else
