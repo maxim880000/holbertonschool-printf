@@ -2,11 +2,15 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-void print_number(unsigned int num)
+int print_number(unsigned int num)
 {
+	int count = 0;
+
 	if (num / 10)
-		print_number(num / 10);
+		count += print_number(num / 10);
 	_putchar((num % 10) + '0');
+	count++;
+	return (count);
 }
 
 /**
@@ -72,12 +76,7 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
-					print_number((unsigned int)num);
-					while (num > 0)
-					{
-						count++;
-						num /= 10;
-					}
+					count += print_number((unsigned int)num);
 				}
 			}
 			else
