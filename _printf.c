@@ -1,11 +1,11 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdarg.h>
-
-int print_number(unsigned int num)
+// recursive function
+int print_number(unsigned int num) 
 {
 	int count = 0;
-
+	// if num / 10 != 0 stillnumber to display
 	if (num / 10)
 		count += print_number(num / 10);
 	_putchar((num % 10) + '0');
